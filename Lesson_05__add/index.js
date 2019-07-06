@@ -13,17 +13,26 @@ let selectArr = function (array) {
 selectArr(arr);
 
 let simpleNum = function () {
+  let arr = [];
   for (let i = 0; i < 100; i++) {
     let del = 0;
+
     for (let n = i; n >= 1; n--) {
       if (i % n == 0) {
         del ++;
       }
     }
     if (del == 2) {
-      console.log('Делители этого числа', 1, 'и', i);
+      arr.push(i);
     }
   }
+  
+  let alertArr = [];
+  for ( let key of arr) {
+    alertArr.push('Делители этого числа', 1, 'и', key, '\n');
+  }
+  alert(alertArr.join(' '));
+
 }
 simpleNum();
 
