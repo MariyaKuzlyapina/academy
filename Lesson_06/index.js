@@ -81,7 +81,9 @@ let appData = {
 };
 appData.asking();
 
-console.log('Расходы за месяц', appData.getExpensesMonth());
+appData.getExpensesMonth();
+
+console.log('Расходы за месяц', appData.expensesMonth);
 
 console.log(appData.getTargetMonth(appData.mission, appData.getBudget()).join(' '));
 
