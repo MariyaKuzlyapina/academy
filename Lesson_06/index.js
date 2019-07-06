@@ -50,14 +50,14 @@ let appData = {
   },
 
   getBudget: function () {
-    let AccumulatedMonth = +appData.budget - appData.expensesMonth;
+    appData.budgetMonth = +appData.budget - appData.expensesMonth;
 
-    appData.budgetDay = function () {
-      if (AccumulatedMonth/30 < 0) {
+    (function () {
+      if (appData.budgetMonth/30 < 0) {
         return 'Что то пошло не так';
-      } else {return AccumulatedMonth/30;}
-    };
-    return AccumulatedMonth;
+      } else {return  appData.budgetDay = appData.budgetMonth/30;}
+    }) ();
+    return appData.budgetMonth;
   },
 
   getTargetMonth: function (a, b) {
@@ -87,4 +87,8 @@ console.log('Расходы за месяц', appData.expensesMonth);
 
 console.log(appData.getTargetMonth(appData.mission, appData.getBudget()).join(' '));
 
-console.log('Уровень дохода:', appData.getStatusIncome(appData.budgetDay()));
+console.log('Уровень дохода:', appData.getStatusIncome(appData.budgetDay));
+
+for ( let elem in appData ) {
+  console.log('Наша программа включает в себя данные: ', appData[elem]);
+}
