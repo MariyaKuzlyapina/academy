@@ -48,25 +48,7 @@ let appData = {
   percentDeposit: 0,
   moneyDeposit: 0,
   start: function () {
-    if (inputBudget.value === '') {
-      buttonStart.setAttribute('disabled', 'disabled');
-    }
-    inputBudget.addEventListener('input',function(){
-      if(this.value != ''){
-          buttonStart.disabled = false;
-      }
-    });
-    buttonStart.addEventListener('click', function() {
-      let inputs = data.querySelectorAll('input');
-      for (let input of inputs) {
-        let attribute = input.getAttribute('type');
-        if (attribute == 'text') {
-          input.setAttribute('disabled', 'disabled');
-        }
-      };
-      buttonCancel.style = 'display: block';
-      control.replaceChild(buttonCancel, buttonStart);
-    });
+
 
     appData.budget = +inputBudget.value;
     appData.getExpenses();
@@ -84,7 +66,7 @@ let appData = {
     inputExpensesMonth.value = appData.expensesMonth;
     inputAddExpenses.value = appData.addExpenses.join(', ');
     inputAddIncome.value = appData.addIncome.join(',');
-    inputTargetMonth.value = Math.ceil(appData.getTargetMonth());
+    inputTargetMonth.value = appData.getTargetMonth();
     inputIncomePeriod.value = appData.calcPeriod();
     inputPeriodSelect.addEventListener('input', function() {
       inputIncomePeriod.value = appData.calcPeriod();
@@ -169,7 +151,9 @@ let appData = {
   },
 
   getTargetMonth: function () {
-    return inputTargetAmount.value / appData.budgetMonth;
+    if (appData.budgetMonth !== 0) {
+      return Math.ceil(inputTargetAmount.value / appData.budgetMonth);
+    } else {return null}
   },
 
   getStatusIncome: function (elem) {
@@ -216,5 +200,24 @@ inputPeriodSelect.addEventListener('input', function() {
   periodAmount.textContent = inputPeriodSelect.value;
 });
 
+if (inputBudget.value === '') {
+  buttonStart.setAttribute('disabled', 'disabled');
+}
+inputBudget.addEventListener('input',function(){
+  if(this.value != ''){
+      buttonStart.disabled = false;
+  }
+});
 
+buttonStart.addEventListener('click', function() {
+  let inputs = data.querySelectorAll('input');
+  for (let input of inputs) {
+    let attribute = input.getAttribute('type');
+    if (attribute == 'text') {
+      input.setAttribute('disabled', 'disabled');
+    }
+  };
+  buttonCancel.style = 'display: block';
+  control.replaceChild(buttonCancel, buttonStart);
+});
 
