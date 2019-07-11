@@ -50,8 +50,12 @@ let appData = {
   start: function () {
     if (inputBudget.value === '') {
       buttonStart.setAttribute('disabled', 'disabled');
-      return;
     }
+    inputBudget.addEventListener('input',function(){
+      if(this.value != ''){
+          buttonStart.disabled = false;
+      }
+    });
     buttonStart.addEventListener('click', function() {
       let inputs = data.querySelectorAll('input');
       for (let input of inputs) {
