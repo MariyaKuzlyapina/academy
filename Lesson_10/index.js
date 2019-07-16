@@ -1,6 +1,4 @@
 
-let section = document.querySelectorAll('.section');
-
 function DomElement (selector, height, width, bg, fontSize) {
   this.selector = selector;
   this.height = height,
@@ -13,26 +11,16 @@ DomElement.prototype.content = function () {
   let newclass = this.selector.substring(1);
   if (isNaN(this.selector) && (this.selector.substring(0,1) == '.')) {
     newclass = this.selector.substring(1);
-    section.innerHTML = `<div class=${newclass}>Ну пипец</div>`;
-    console.log('section: ', section);
-    let div = document.querySelectorAll(`.${newclass}`);
-    console.log('div: ', div);
-    div.style.cssText = `height: ${this.height}`;
-    div.style.width = this.width;
-    div.style.background = this.bg;
-    div.style.fontSize = this.fontSize;
-    div.style.height = this.height;
-
+    document.body.innerHTML = `<div class=${newclass}>Я класс</div>`;
+    let div = document.querySelector(`.${newclass}`);
+    div.style.cssText = `height: ${this.height}; width: ${this.width}; background: ${this.bg}; font-size: ${this.fontSize}`;
   } else if (isNaN(this.selector) && (this.selector.substring(0,1) == '#')) {
-    section.innerHTML = "<p class=newclass>Пиздец</p>";
-    P.style.height = this.height;
-    p.style.width = this.height;
-    p.style.background = this.bg;
-    p.style.fontSize = this.fontSize;
-    p.style.height = this.height;
+    newclass = this.selector.substring(1);
+    document.body.innerHTML = `<p class=${newclass}>Я айди</p>`;
+    let p = document.querySelector(`.${newclass}`);
+    p.style.cssText = `height: ${this.height}; width: ${this.width}; background: ${this.bg}; font-size: ${this.fontSize}`;
   }
 }
 
-let newDom = new DomElement('.head', '80px', '123px', 'red', '18px');
+let newDom = new DomElement('.head', '80px', '123px', 'red', '20px');
 newDom.content();
-
