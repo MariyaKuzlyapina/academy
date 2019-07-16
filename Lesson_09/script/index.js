@@ -226,15 +226,18 @@ inputBudget.addEventListener('input',function(){
 });
 
 buttonStart.addEventListener('click', function() {
-  let inputs = data.querySelectorAll('input');
-  for (let input of inputs) {
-    let attribute = input.getAttribute('type');
-    if (attribute == 'text') {
-      input.setAttribute('disabled', 'disabled');
-    }
-  };
-  buttonCancel.style = 'display: block';
-  control.replaceChild(buttonCancel, buttonStart);
+  if (inputBudget.value !== '') {
+    let inputs = data.querySelectorAll('input');
+    for (let input of inputs) {
+      let attribute = input.getAttribute('type');
+      if (attribute == 'text') {
+        input.setAttribute('disabled', 'disabled');
+      }
+    };
+
+    buttonCancel.style = 'display: block';
+    control.replaceChild(buttonCancel, buttonStart);
+  }
 });
 
 buttonCancel.addEventListener('click', appData.reset.bind(appData));
