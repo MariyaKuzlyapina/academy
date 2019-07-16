@@ -115,8 +115,8 @@ let appData = {
       }
     })
 
-    for (let key in appData.income) {
-      appData.incomeMonth += +appData.income[key];
+    for (let key in this.income) {
+      this.incomeMonth += +this.income[key];
     }
   },
   getExpenses: function() {
