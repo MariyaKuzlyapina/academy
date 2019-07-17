@@ -203,72 +203,77 @@ AppData.prototype.reset = function() {
     if (index > 0) {
       arrExpenses[index].remove();
     }
-  })
+  });
+  plusExpenses.style.display = 'block';
 
   let arrIncome = Array.from(incomeItems);
   arrIncome.forEach(function(input, index, arrIncome) {
     if (index > 0) {
       arrIncome[index].remove();
     }
-  })
+  });
+  plusIncome.style.display = 'block';
+
 
   control.replaceChild(buttonStart, buttonCancel);
 };
 
-let appData = new AppData;
+AppData.prototype.eventsListeners = function() {
+  buttonStart.addEventListener('click', this.start());
+  plusExpenses.addEventListener('click', appData.addExpensesBlock.bind(appData));
+  plusIncome.addEventListener('click', appData.addIncomeBlock.bind(appData));
+  inputPeriodSelect.addEventListener('input', function() {
+    periodAmount.textContent = inputPeriodSelect.value;
+  });
 
-buttonStart.addEventListener('click', appData.start.bind(appData));
-plusExpenses.addEventListener('click', appData.addExpensesBlock.bind(appData));
-plusIncome.addEventListener('click', appData.addIncomeBlock.bind(appData));
-inputPeriodSelect.addEventListener('input', function() {
-  periodAmount.textContent = inputPeriodSelect.value;
-});
+  if (inputBudget.value === '') {
+    buttonStart.setAttribute('disabled', 'disabled');
+  }
+  inputBudget.addEventListener('input',function(){
+    if(this.value != ''){
+        buttonStart.disabled = false;
+    }
+  });
 
-if (inputBudget.value === '') {
-  buttonStart.setAttribute('disabled', 'disabled');
+  buttonStart.addEventListener('click', function() {
+    if (inputBudget.value !== '') {
+      let inputs = data.querySelectorAll('input');
+      for (let input of inputs) {
+        let attribute = input.getAttribute('type');
+        if (attribute == 'text') {
+          input.setAttribute('disabled', 'disabled');
+        }
+      };
+
+      buttonCancel.style = 'display: block';
+      control.replaceChild(buttonCancel, buttonStart);
+    }
+  });
+
+  checkbox.addEventListener('change', function() {
+    if(checkbox.checked) {
+      depositBank.style.display = 'inline-block';
+      depositAmount.style.display = 'inline-block';
+      appData.deposit = 'true';
+      depositBank.addEventListener('change', function(){
+        let selectIndex = this.options[this.selectedIndex].value;
+        if(selectIndex === 'other'){
+          depositPercent.style.display = 'inline-block';
+          depositPercent.value = '';
+        } else {
+          depositPercent.style.display = 'none';
+          depositPercent.value = selectIndex;
+        }
+      })
+    } else {
+      depositBank.style.display = 'none';
+      depositAmount.style.display = 'none';
+      depositAmount.value = '';
+      appData.deposit = 'false';
+    }
+  })
+
+  buttonCancel.addEventListener('click', appData.reset.bind(appData));
 }
-inputBudget.addEventListener('input',function(){
-  if(this.value != ''){
-      buttonStart.disabled = false;
-  }
-});
 
-buttonStart.addEventListener('click', function() {
-  if (inputBudget.value !== '') {
-    let inputs = data.querySelectorAll('input');
-    for (let input of inputs) {
-      let attribute = input.getAttribute('type');
-      if (attribute == 'text') {
-        input.setAttribute('disabled', 'disabled');
-      }
-    };
-
-    buttonCancel.style = 'display: block';
-    control.replaceChild(buttonCancel, buttonStart);
-  }
-});
-
-checkbox.addEventListener('change', function() {
-  if(checkbox.checked) {
-    depositBank.style.display = 'inline-block';
-    depositAmount.style.display = 'inline-block';
-    appData.deposit = 'true';
-    depositBank.addEventListener('change', function(){
-      let selectIndex = this.options[this.selectedIndex].value;
-      if(selectIndex === 'other'){
-        depositPercent.style.display = 'inline-block';
-        depositPercent.value = '';
-      } else {
-        depositPercent.style.display = 'none';
-        depositPercent.value = selectIndex;
-      }
-    })
-  } else {
-    depositBank.style.display = 'none';
-    depositAmount.style.display = 'none';
-    depositAmount.value = '';
-    appData.deposit = 'false';
-  }
-})
-
-buttonCancel.addEventListener('click', appData.reset.bind(appData));
+let appData = new AppData;

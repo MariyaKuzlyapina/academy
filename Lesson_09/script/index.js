@@ -70,14 +70,16 @@ let appData = {
       if (index > 0) {
         arrExpenses[index].remove();
       }
-    })
+    });
+    plusExpenses.style.display = 'block';
 
     let arrIncome = Array.from(incomeItems);
     arrIncome.forEach(function(input, index, arrIncome) {
       if (index > 0) {
         arrIncome[index].remove();
       }
-    })
+    });
+    plusIncome.style.display = 'block';
 
     control.replaceChild(buttonStart, buttonCancel);
   },
