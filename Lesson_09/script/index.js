@@ -61,8 +61,23 @@ let appData = {
       input.value = '';
       input.removeAttribute('disabled', 'disabled');
     });
+
     inputPeriodSelect.value = '1';
     periodAmount.textContent = inputPeriodSelect.value;
+
+    let arrExpenses = Array.from(expensesItems);
+    arrExpenses.forEach(function(input, index, arrExpenses) {
+      if (index > 0) {
+        arrExpenses[index].remove();
+      }
+    })
+
+    let arrIncome = Array.from(incomeItems);
+    arrIncome.forEach(function(input, index, arrIncome) {
+      if (index > 0) {
+        arrIncome[index].remove();
+      }
+    })
 
     control.replaceChild(buttonStart, buttonCancel);
   },
