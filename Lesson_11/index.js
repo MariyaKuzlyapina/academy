@@ -1,6 +1,6 @@
 'use strict';
 
-let buttonStart = document.querySelector('#start'),
+const buttonStart = document.querySelector('#start'),
   buttonCancel = document.querySelector('#cancel'),
   data = document.querySelector('.data'),
   control = document.querySelector('.control'),
@@ -50,9 +50,9 @@ inputBudget.addEventListener('input',function(){
 
 buttonStart.addEventListener('click', function() {
   if (inputBudget.value !== '') {
-    let inputs = data.querySelectorAll('input');
+    const inputs = data.querySelectorAll('input');
     for (let input of inputs) {
-      let attribute = input.getAttribute('type');
+      const attribute = input.getAttribute('type');
       if (attribute == 'text') {
         input.setAttribute('disabled', 'disabled');
       }
@@ -69,7 +69,7 @@ checkbox.addEventListener('change', function() {
     depositAmount.style.display = 'inline-block';
     appData.deposit = 'true';
     depositBank.addEventListener('change', function(){
-      let selectIndex = this.options[this.selectedIndex].value;
+      const selectIndex = this.options[this.selectedIndex].value;
       if(selectIndex === 'other'){
         depositPercent.style.display = 'inline-block';
         depositPercent.value = '';
