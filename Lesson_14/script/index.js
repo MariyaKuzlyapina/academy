@@ -60,10 +60,8 @@ window.addEventListener('DOMContentLoaded', function() {
     body.addEventListener('click', (event) => {
       let target = event.target;
       if(target.closest('.menu')) handlerMenu();
-      else if (target.closest('.active-menu')){
-        if(target.classList.contains('active-menu')) return;
-        else handlerMenu();
-      } else menu.classList.remove('active-menu');
+      else if (target.closest('.active-menu')) handlerMenu();
+      else menu.classList.remove('active-menu');
     });
   };
 
