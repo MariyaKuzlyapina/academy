@@ -16,6 +16,7 @@ import hoverEffect from './module/hoverEffect';
 import numValid from './module/numValid';
 import sendForm from './module/sendForm';
 import togglePopUp from './module/togglePopUp';
+import calc from './module/calc';
 
 //таймер
 countTimer('24 july 2019');
@@ -34,6 +35,9 @@ hoverEffect();
 
 //валидация формы
 numValid();
+
+//калькулятор
+calc();
 
 //send-ajax-form
 sendForm('form1');
