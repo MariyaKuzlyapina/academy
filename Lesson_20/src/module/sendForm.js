@@ -46,7 +46,7 @@ const sendForm = (idForm) => {
       headers: {
         'Content-Type': 'application/json'
       },
-      body: formData,
+      body: JSON.stringify(formData),
     })
   }
 }
