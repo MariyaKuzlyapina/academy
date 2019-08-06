@@ -237,7 +237,6 @@ window.addEventListener('DOMContentLoaded', function() {
       postData(formData)
         .then((response) => {
           if (response.status !== 200) throw new Error('status network not 200');
-          console.log(response);
           statusMessage.textContent = successMessage;
         })
         .catch((error) => {
