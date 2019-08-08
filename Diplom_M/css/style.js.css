@@ -1,0 +1,7 @@
+.clubs-list__points_active {
+  display: block !important;
+}
+
+.clubs-list__title_active {
+  background: url(../images/list-arrow-reverse.png) no-repeat 30px center !important;
+}
