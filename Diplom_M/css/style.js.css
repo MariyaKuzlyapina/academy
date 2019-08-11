@@ -5,3 +5,32 @@
 .clubs-list__title_active {
   background: url(../images/list-arrow-reverse.png) no-repeat 30px center !important;
 }
+
+.active {
+  display: block !important;
+}
+
+.no-active {
+  display: none !important;
+}
+
+.dots {
+  height: 20%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.dot {
+  border-radius: 50%;
+  width: 12px;
+  height: 12px;
+  background: #fff;
+  margin: 10px;
+  z-index: 1000;
+  cursor: pointer;
+}
+
+.dot-active {
+  background: yellow;
+}
